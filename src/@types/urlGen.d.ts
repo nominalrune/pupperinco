@@ -1,0 +1,1 @@
+abstract function urlGen(params:Array<string|number>):[firstUrl:string,Generator<string>]

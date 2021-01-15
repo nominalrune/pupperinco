@@ -1,0 +1,52 @@
+{
+	"0": {
+		"name": "学参ドットコム",
+		"url": {
+			"baseurl": "https://www.gakusan.com/home/result.php",
+			"query": {
+				"publisher": "company=",
+				"minYear": "saledate_from=",
+				"maxYear": "saledate_to=",
+				"series": "series=",
+				"isbn": "isbn=",
+				"offset": "page_offset="
+			},
+			"OFFSET_STEP":20
+		},
+		"totalCount": {
+			"query": "div.result_comment > span:nth-child(1)",
+			"replace": {"reg":"[^\\d]","alt":""}
+		},
+		"book": {
+			"itemChunk": {
+				"query": "div.book_box50"
+			},
+			"props": {
+				"image": {
+					"query": "div.book_image > a > img",
+					"text":"currentSrc"
+				},
+				"title": {
+					"query": "div.book_detail > p:nth-child(1) > a > strong",
+					"text":"textContent"
+				},
+				"publisher": {
+					"query": "div.book_detail > p:nth-child(2) > a",
+					"text":"textContent"
+				},
+				"isbn": {
+					"query": "div.book_detail > p:nth-child(3)",
+					"replace": {"reg":"[^\\d]","alt":""}
+				},
+				"price": {
+					"query": "div.book_detail > p.price",
+					"replace": {"reg":"[^\\d]","alt":""}
+				},
+				"containingYears":{
+					"query": "div.book_detail > p:nth-child(1) > a > strong",
+					"replace": {"reg":".*?(\\d)年間.*","alt":"$1"}
+				}
+			}
+		}
+	}
+}
